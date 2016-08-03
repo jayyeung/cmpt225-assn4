@@ -23,5 +23,5 @@ public:
 
       // gets/inserts a word object into the hash table
       Word* getElement(int key);
-      void insertElement(int key, Word* value);
+      bool insertElement(int key, Word* value);
 };

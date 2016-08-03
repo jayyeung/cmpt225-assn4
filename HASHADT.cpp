@@ -49,7 +49,7 @@ Word* HASHADT::getElement(int key) {
   }
 }
 
-void HASHADT::insertElement(int key, Word* value) {
+bool HASHADT::insertElement(int key, Word* value) {
   int hash_encoding = (key % table_size);
 
   if (table[hash_encoding] == NULL) {
@@ -59,6 +59,10 @@ void HASHADT::insertElement(int key, Word* value) {
     HashNode* cur_node = table[hash_encoding];
 
     while (cur_node->getNext() != NULL) {
+      if (cur_node->getValue()->getEnglish() == value->getEnglish()) {
+        cout << "already inserted" << endl;
+        return false;
+      }
       cur_node = cur_node->getNext();
     }
     if (cur_node->getKey() == key) {
@@ -67,5 +71,8 @@ void HASHADT::insertElement(int key, Word* value) {
     else {
           cur_node->setNext(new HashNode(key, value));
     }
+    cout << "inserted " << endl;
+    return true;
   }
+  return false;
 }
