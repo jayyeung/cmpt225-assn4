@@ -73,6 +73,7 @@ bool HASHADT::insertElement(int key, Word* value) {
 }
 
 void HASHADT::printAll() {
+  // for loop is O(1)
   for (int i = 0; i < table_size; i++) {
     HashNode* cur_node = table[i];
 
