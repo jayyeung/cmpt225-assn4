@@ -67,12 +67,16 @@ int main() {
 
 		string aLine;
     while(getline(cin, aLine)) {   // while (there is data)
-				// else, find the translation and only display that
 				if (aLine != "") {
-	        stringstream ss(aLine);
-	        ss << aLine << ": " << TranslatorLib->getElement(aLine);
+					if (aLine == "display") {
+						TranslatorLib->printAll();
+					}
 
-					cout << ss.str() << endl;
+					else {
+						stringstream ss(aLine);
+						ss << aLine << ": " << TranslatorLib->getElement(aLine);
+						cout << ss.str() << endl;
+				}
 			}
     }
 	}

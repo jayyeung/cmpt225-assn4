@@ -14,7 +14,7 @@
 using namespace std;
 
 HASHADT::HASHADT() {
-  table_size = 1024;
+  table_size = 32;
   table = new HashNode*[table_size];
   // set all hash key values to NULL
   for (int i = 0; i < table_size; i++) {
@@ -60,7 +60,7 @@ bool HASHADT::insertElement(int key, Word* value) {
       cur_node = cur_node->getNext();
 
       if (cur_node->getValue()->getEnglish() == value->getEnglish()) {
-            cout << "already inserted" << endl;
+            cout << value->getEnglish() << " already inserted -- IGNORE" << endl;
             return false;
       }
     }
@@ -70,4 +70,15 @@ bool HASHADT::insertElement(int key, Word* value) {
     return true;
   }
   return false;
+}
+
+void HASHADT::printAll() {
+  for (int i = 0; i < table_size; i++) {
+    HashNode* cur_node = table[i];
+
+    while(cur_node != NULL) {
+      cout << cur_node->getValue()->getEnglish() << ": " << cur_node->getValue()->getKlingon() << endl;
+      cur_node = cur_node->getNext();
+    }
+  }
 }
