@@ -22,6 +22,6 @@ public:
       HASHADT();
 
       // gets/inserts a word object into the hash table
-      Word* getElement(int key);
+      string getElement(string key);
       bool insertElement(int key, Word* value);
 };

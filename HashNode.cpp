@@ -12,7 +12,7 @@
 #include "HashNode.h"
 #include "Word.h"
 
-HashNode::HashNode(int key, Word* data) {
+HashNode::HashNode(int key, Word* value) {
       this->key = key;
       this->value = value;
       this->next = NULL;

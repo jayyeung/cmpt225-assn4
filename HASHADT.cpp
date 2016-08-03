@@ -22,8 +22,8 @@ HASHADT::HASHADT() {
   }
 }
 
-Word* HASHADT::getElement(int key) {
-  int hash_encoding = (key % table_size);
+string HASHADT::getElement(string key) {
+  int hash_encoding = (int(key[0]) % table_size);
 
   // if at index hash_encoding is valid
   if (table[hash_encoding] != NULL) {
@@ -32,21 +32,17 @@ Word* HASHADT::getElement(int key) {
     HashNode* cur_node = table[hash_encoding];
 
     // while we go thru each node and key value is not the same
-    while (cur_node != NULL && cur_node->getKey() != key) {
+    while (cur_node != NULL) {
+      if (cur_node->getValue()->getEnglish() == key) {
+        return cur_node->getValue()->getKlingon();
+      }
+
       cur_node = cur_node->getNext();
     }
     // if we are at last node
-    if (cur_node == NULL) {
-      return NULL;
-    }
-    // we found the node, return the value
-    else {
-      return cur_node->getValue();
-    }
   }
-  else {
-    return NULL;
-  }
+
+  return "NOT FOUND";
 }
 
 bool HASHADT::insertElement(int key, Word* value) {
@@ -54,23 +50,22 @@ bool HASHADT::insertElement(int key, Word* value) {
 
   if (table[hash_encoding] == NULL) {
     table[hash_encoding] = new HashNode(key, value);
+    cout << "inserted " << endl;
+    return true;
   }
   else {
     HashNode* cur_node = table[hash_encoding];
 
     while (cur_node->getNext() != NULL) {
-      if (cur_node->getValue()->getEnglish() == value->getEnglish()) {
-        cout << "already inserted" << endl;
-        return false;
-      }
       cur_node = cur_node->getNext();
+
+      if (cur_node->getValue()->getEnglish() == value->getEnglish()) {
+            cout << "already inserted" << endl;
+            return false;
+      }
     }
-    if (cur_node->getKey() == key) {
-          cur_node->setValue(value);
-    }
-    else {
-          cur_node->setNext(new HashNode(key, value));
-    }
+    cur_node->setNext(new HashNode(key, value));
+
     cout << "inserted " << endl;
     return true;
   }

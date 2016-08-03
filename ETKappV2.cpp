@@ -38,7 +38,7 @@ bool readDataFile(const char* filename, HASHADT* TranslatorLib) {
 
 			// add word into translator lib
 			Word* newVocab = new Word(EngWrd, KlngWrd);
-			TranslatorLib->insertElement(EngWrd[0], newVocab);
+			TranslatorLib->insertElement(tolower(EngWrd[0]), newVocab);
 
 			// print out line
 			cout << line << "\n";
@@ -70,7 +70,7 @@ int main() {
 				// else, find the translation and only display that
 				if (aLine != "") {
 	        stringstream ss(aLine);
-	        ss << aLine << ": " << TranslatorLib->getElement(aLine[0])->getKlingon();
+	        ss << aLine << ": " << TranslatorLib->getElement(aLine);
 
 					cout << ss.str() << endl;
 			}
